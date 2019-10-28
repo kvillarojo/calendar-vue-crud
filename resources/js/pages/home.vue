@@ -46,7 +46,10 @@
                         </form>
                     </div>
                     <div class="col-md-8">
-                        Calendar Content
+                        <span class="calindar-title"> Content </span>
+                        <ul v-for="event in calindarEvents" :key='todo.id' class="list">
+                            <li>{{}}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -55,7 +58,7 @@
 
 </template>
 <script>
-import {mapState, mapGetters, mapActions} from 'vuex'
+import { mapGetters } from 'vuex'
 import WeekDayName from "../components/weekDayName";
 
 export default {
@@ -63,18 +66,21 @@ export default {
     components: {
         'week-name': WeekDayName
     },
-    data: () => {
-        return {
-            eventName: '',
-            dateFrom: '',
-            dateTo: '',
-            weekDays: []
-        }
-    },
-    methods: {
-        setEventDate : (e) => {
-            alert()
-        }
+    // data: () => {
+    //     return {
+    //         eventName: '',
+    //         dateFrom: '',
+    //         dateTo: '',
+    //         weekDays: []
+    //     }
+    // },
+    // methods: {
+    //     setEventDate : (e) => {
+    //         console.log('test submit event setup');
+    //     }
+    // },
+    computed: () => {
+       console.log('test')
     }
 }
 </script>

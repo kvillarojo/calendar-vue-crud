@@ -2038,6 +2038,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2045,18 +2048,21 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     'week-name': _components_weekDayName__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  data: function data() {
-    return {
-      eventName: '',
-      dateFrom: '',
-      dateTo: '',
-      weekDays: []
-    };
-  },
-  methods: {
-    setEventDate: function setEventDate(e) {
-      alert();
-    }
+  // data: () => {
+  //     return {
+  //         eventName: '',
+  //         dateFrom: '',
+  //         dateTo: '',
+  //         weekDays: []
+  //     }
+  // },
+  // methods: {
+  //     setEventDate : (e) => {
+  //         console.log('test submit event setup');
+  //     }
+  // },
+  computed: function computed() {
+    console.log('test');
   }
 });
 
@@ -20679,9 +20685,22 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-8" }, [
-            _vm._v("\n                    Calendar Content\n                ")
-          ])
+          _c(
+            "div",
+            { staticClass: "col-md-8" },
+            [
+              _c("span", { staticClass: "calindar-title" }, [
+                _vm._v(" Content ")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.calindarEvents, function(event) {
+                return _c("ul", { key: _vm.todo.id, staticClass: "list" }, [
+                  _c("li", [_vm._v("{{}}")])
+                ])
+              })
+            ],
+            2
+          )
         ])
       ])
     ])
@@ -36830,7 +36849,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/App */ "./resources/js/components/App.vue");
-/* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router.js */ "./resources/js/router.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./router.js */ "./resources/js/router.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -36842,9 +36862,11 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
+
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a(_objectSpread({
   el: '#app',
-  router: _router_js__WEBPACK_IMPORTED_MODULE_2__["router"]
+  store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
+  router: _router_js__WEBPACK_IMPORTED_MODULE_3__["router"]
 }, _components_App__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
@@ -37374,6 +37396,76 @@ var routes = [{
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: routes,
   mode: "history"
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/index.js":
+/*!*************************************!*\
+  !*** ./resources/js/store/index.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _modules_calindar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/calindar */ "./resources/js/store/modules/calindar.js");
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var store = {
+  modules: {
+    calindar: _modules_calindar__WEBPACK_IMPORTED_MODULE_2__["default"]
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store(store));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/calindar.js":
+/*!************************************************!*\
+  !*** ./resources/js/store/modules/calindar.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+var state = {
+  message: null,
+  error: null,
+  fetching: false,
+  data: [{
+    id: 0,
+    value: 1,
+    isActive: true,
+    eventName: 'Test Event'
+  }, {
+    id: 0,
+    value: 2,
+    isActive: false,
+    eventName: 'Test Event'
+  }]
+};
+var getters = {
+  calindarEvents: function calindarEvents(state) {
+    return state.data;
+  }
+};
+var actions = {};
+var mutations = {};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: state,
+  getters: getters,
+  actions: actions,
+  mutations: mutations
 });
 
 /***/ }),
