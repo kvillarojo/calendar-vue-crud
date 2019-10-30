@@ -46,9 +46,9 @@
                         </form>
                     </div>
                     <div class="col-md-8">
-                        <span class="calindar-title"> Content </span>
-                        <ul v-for="event in calindarEvents" :key='todo.id' class="list">
-                            <li>{{}}</li>
+                        <span class="calindar-title"> {{ monthName }} </span>
+                        <ul v-for="event in calindarEvents" :key='event.id' class="list">
+                            <li>{{ event.eventName }}</li>
                         </ul>
                     </div>
                 </div>
@@ -66,21 +66,21 @@ export default {
     components: {
         'week-name': WeekDayName
     },
-    // data: () => {
-    //     return {
-    //         eventName: '',
-    //         dateFrom: '',
-    //         dateTo: '',
-    //         weekDays: []
-    //     }
-    // },
-    // methods: {
-    //     setEventDate : (e) => {
-    //         console.log('test submit event setup');
-    //     }
-    // },
-    computed: () => {
-       console.log('test')
+    data: () => {
+        return {
+            eventName: '',
+            dateFrom: '',
+            dateTo: '',
+            weekDays: []
+        }
+    },
+    methods: {
+        setEventDate : (e) => {
+            console.log('test submit event setup');
+        }
+    },
+    computed: {
+        ...mapGetters(['calindarEvents', 'monthName'])
     }
 }
 </script>

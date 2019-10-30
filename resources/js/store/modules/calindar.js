@@ -4,24 +4,13 @@ const state = {
     message: null,
     error: null,
     fetching: false,
-    data: [
-        {
-            id: 0,
-            value: 1,
-            isActive: true,
-            eventName: 'Test Event'
-        },
-        {
-            id: 0,
-            value: 2,
-            isActive: false,
-            eventName: 'Test Event'
-        }
-    ]
+    data: [],
+    monthName: 'Not Set'
 }
 
 const getters = {
-    calindarEvents: (state) => state.data
+    calindarEvents: (state) => state.data,
+    monthName: (state) => state.monthName
 }
 
 const actions = {}

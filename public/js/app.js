@@ -1982,6 +1982,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _components_weekDayName__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/weekDayName */ "./resources/js/components/weekDayName.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2048,22 +2054,20 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     'week-name': _components_weekDayName__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  // data: () => {
-  //     return {
-  //         eventName: '',
-  //         dateFrom: '',
-  //         dateTo: '',
-  //         weekDays: []
-  //     }
-  // },
-  // methods: {
-  //     setEventDate : (e) => {
-  //         console.log('test submit event setup');
-  //     }
-  // },
-  computed: function computed() {
-    console.log('test');
-  }
+  data: function data() {
+    return {
+      eventName: '',
+      dateFrom: '',
+      dateTo: '',
+      weekDays: []
+    };
+  },
+  methods: {
+    setEventDate: function setEventDate(e) {
+      console.log('test submit event setup');
+    }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['calindarEvents', 'monthName']))
 });
 
 /***/ }),
@@ -20690,12 +20694,12 @@ var render = function() {
             { staticClass: "col-md-8" },
             [
               _c("span", { staticClass: "calindar-title" }, [
-                _vm._v(" Content ")
+                _vm._v(" " + _vm._s(_vm.monthName) + " ")
               ]),
               _vm._v(" "),
               _vm._l(_vm.calindarEvents, function(event) {
-                return _c("ul", { key: _vm.todo.id, staticClass: "list" }, [
-                  _c("li", [_vm._v("{{}}")])
+                return _c("ul", { key: event.id, staticClass: "list" }, [
+                  _c("li", [_vm._v(_vm._s(event.eventName))])
                 ])
               })
             ],
@@ -37442,21 +37446,15 @@ var state = {
   message: null,
   error: null,
   fetching: false,
-  data: [{
-    id: 0,
-    value: 1,
-    isActive: true,
-    eventName: 'Test Event'
-  }, {
-    id: 0,
-    value: 2,
-    isActive: false,
-    eventName: 'Test Event'
-  }]
+  data: [],
+  monthName: 'Not Set'
 };
 var getters = {
   calindarEvents: function calindarEvents(state) {
     return state.data;
+  },
+  monthName: function monthName(state) {
+    return state.monthName;
   }
 };
 var actions = {};
